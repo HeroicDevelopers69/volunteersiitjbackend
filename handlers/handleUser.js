@@ -67,3 +67,20 @@ export async function fetchUser(userId) {
         console.log("Error occured while fetching user",err);
     }
 }
+
+export async function check(email) {
+    try{
+        const result = await User.findOne({"email": email})
+        if(result){
+            console.log("User fetched",result)
+            return result;
+        }
+        else{
+            console.log("No such user found");
+            return false;
+        }
+    }
+    catch(err){
+        console.log("Error occured while fetching user",err);
+    }
+}
