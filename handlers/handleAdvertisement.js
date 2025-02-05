@@ -7,7 +7,7 @@ export function createAdvertisement(ad){
     const newAd = new Advertisement(ad);
 
     newAd.save()
-        .then(ad=> console.log("Advertisement saved:",ad))
+        .then(ad=> console.log("Advertisement saved:"))
         .catch(err=> console.log("Error while saving advertisement",err));
 }
 
@@ -15,11 +15,11 @@ export async function modifyAdvertisement(advertisementId,updates){
     try{
         const updatedAd = await Advertisement.findOneAndUpdate({ advertisementId: advertisementId },updates,{new:true})
         if(updatedAd){
-            console.log("Advertisement updated ",updatedAd);
+            console.log("Advertisement updated ");
             return true;
         }
         else{
-            console.log("No such Advertisement found",advertisementId);
+            console.log("No such Advertisement found");
             return false;
         }
     }
@@ -32,7 +32,7 @@ export async function deleteAdvertisement(advertisementId){
     try{
         const result = await Advertisement.findOneAndDelete({ "advertisementId" : advertisementId })
         if(result){
-            console.log("Advertisement deleted ",advertisementId)
+            console.log("Advertisement deleted ")
             return true;
         }
         else{
@@ -50,7 +50,7 @@ export async function getAllAdsvetisements(){
     try{
         const result = await Advertisement.find({})
         if(result){
-            console.log("Advertisements fetched",result)
+            console.log("Advertisements fetched")
             return Array.from(result);
         }
         else{

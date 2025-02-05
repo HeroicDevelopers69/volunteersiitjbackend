@@ -7,6 +7,7 @@ import { createUser, modifyUser, deleteUser, fetchUser } from './handlers/handle
 import { createAdvertisement, modifyAdvertisement, deleteAdvertisement, getAllAdsvetisements } from './handlers/handleAdvertisement.js';
 import { createNews, modifyNews, deleteNews, getAllNews } from './handlers/handleNews.js';
 import { uploadToCloudinary } from './handlers/handleImageUpload.js';
+import { createFormSubmission } from './handlers/handleFormSubmission.js';
 
 dotenv.config();
 
@@ -190,6 +191,19 @@ app.get("/getAllNews", async (req,res)=>{
     }
 })
 
+// handle form submission
+
+app.post("/submitForm", async (req,res)=>{
+    const {adId, userId, data} = req.body;
+    try{
+        createFormSubmission(adId,userId, data)
+        res.status(200).json({message: "Form Submitted Successfully"})
+    }  
+    catch(err){
+        console.log(err);
+        res.status(500).json({message: "Failed to fetching news", error: `${err}`})
+    }
+})
 
 // for handling image uploads
 const upload = multer({ dest: 'uploads/' });
